@@ -1,0 +1,18 @@
+
+only one                      0 or more than one                        0 or more than one
+Cloud Cover Labels            More Common Labels                        Less Common Labels
+(atmospheric conditions)      (common land cover/land use phenomena)    rare land cover/land use phenomena
+
+clear                         primary(Primary Rain Forest)              slash_burn(Slash and Burn)
+haze                          water (Rivers & Lakes)                    selective_logging(Selective Logging)
+partly_cloudy                 habitation                                blooming
+                              agriculture                               conventional_mine(Conventional Mining)
+                              road                                      artisinal_mine("Artisinal" Mining)
+                              cultivation                               blow_down(Blow Down)
+                              bare_ground(Bare Ground)
+
+
+
+
+
+cloudy --->X
