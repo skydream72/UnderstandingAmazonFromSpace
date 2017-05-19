@@ -4,15 +4,19 @@ import json
 from keras.applications.resnet50 import ResNet50
 from keras.models import Model, model_from_json
 from keras.layers import Dense, GlobalAveragePooling2D
+from keras.layers import Input, Flatten
 
 MODEL_NAME = "ResNet50"
 # create the base pre-trained model
 def build_model(nb_classes):
     base_model = ResNet50(weights='imagenet', include_top=False)
 
-    # add a global spatial average pooling layer
-    x = base_model.output
-    x = GlobalAveragePooling2D()(x)
+    input = Input(shape=(256,256,3),name = 'image_input')
+    #Use the generated model 
+    output_resnet50_conv =  base_model(input)
+    
+    x = Flatten(name='flatten')(output_resnet50_conv)
+    #x = GlobalAveragePooling2D()(x)
     #print("GlobalAveragePooling x = " + x)
     # let's add a fully-connected layer
     x = Dense(1024, activation='relu')(x) #why need extra fully convolution layer?
@@ -20,7 +24,7 @@ def build_model(nb_classes):
     predictions = Dense(nb_classes, activation='sigmoid')(x)
 
     # this is the model we will train
-    model = Model(input=base_model.input, output=predictions)
+    model = Model(input=input, output=predictions)
 
     # first: train only the top layers (which were randomly initialized)
     # i.e. freeze all convolutional InceptionV3 layers
